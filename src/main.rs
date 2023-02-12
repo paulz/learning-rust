@@ -39,7 +39,7 @@ fn test_hello_world() {
 
 #[test]
 fn test_hex_to_rgb() {
-    let cases: [(&str, (u8,u8,u8));8] = [
+    let success_cases: [(&str, (u8,u8,u8));8] = [
         ("#000000", (0, 0, 0)),
         ("#ffffff", (255, 255, 255)),
         ("#FF0000", (255, 0, 0)),
@@ -50,12 +50,15 @@ fn test_hex_to_rgb() {
         ("#hello", (0, 0, 0)),
     ];
 
-    for case in cases.iter() {
+    for case in success_cases.iter() {
         let (hex, expected) = case;
         let result = hex_to_rgb(hex);
         
         assert_eq!(result.ok().unwrap(), *expected, "hex: {}", hex);
     }
+
+    let invalid_result = hex_to_rgb("foo");
+    assert_eq!(invalid_result.err().unwrap(), "Invalid color");
 }
 
 
