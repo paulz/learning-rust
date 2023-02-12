@@ -1,15 +1,9 @@
-fn just_hello() -> String {
-    String::from("Hello")
-}
-
-fn hello_world() -> String {
-    "Hello, world!".to_string()
-}
+#!no_std
 
 fn hex_to_rgb(hex: &str) -> Result<(u8, u8, u8), &str> {
     let hex = hex.trim_start_matches('#');
 
-    let result:Result<(u8, u8, u8), &str> = if hex.len() == 6 {
+    let result: Result<(u8, u8, u8), &str> = if hex.len() == 6 {
         let r = u8::from_str_radix(&hex[0..2], 16).unwrap();
         let g = u8::from_str_radix(&hex[2..4], 16).unwrap();
         let b = u8::from_str_radix(&hex[4..6], 16).unwrap();
@@ -27,19 +21,12 @@ fn hex_to_rgb(hex: &str) -> Result<(u8, u8, u8), &str> {
 }
 
 fn main() {
-    println!("{}", just_hello());
-    println!("{}", hello_world());
     // println!("{}", convert_colors());
 }
 
 #[test]
-fn test_hello_world() {
-    assert_eq!(hello_world(), "Hello, world!");
-}
-
-#[test]
 fn test_valid_hex_to_rgb() {
-    let success_cases: [(&str, (u8,u8,u8));7] = [
+    let success_cases: [(&str, (u8, u8, u8)); 7] = [
         ("#000000", (0, 0, 0)),
         ("#ffffff", (255, 255, 255)),
         ("#FF0000", (255, 0, 0)),
@@ -52,7 +39,7 @@ fn test_valid_hex_to_rgb() {
     for case in success_cases.iter() {
         let (hex, expected) = case;
         let result = hex_to_rgb(hex);
-        
+
         assert_eq!(result.ok().unwrap(), *expected, "hex: {}", hex);
     }
 }
@@ -63,13 +50,11 @@ fn test_invalid_hex_to_rgb() {
     assert_eq!(invalid_result.err().unwrap(), "Invalid color");
 }
 
-
 #[cfg(test)]
 mod tests {
-    use super::hello_world;
 
     #[test]
-    fn test_hello_world() {
-        assert_eq!(hello_world(), "Hello, world!");
+    fn test_valid_hex_to_rgb() {
+        // assert_eq!(hello_world(), "Hello, world!");
     }
 }
