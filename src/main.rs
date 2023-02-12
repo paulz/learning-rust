@@ -6,12 +6,6 @@ fn hello_world() -> String {
     "Hello, world!".to_string()
 }
 
-// fn convert_color(color: String) -> [u8; 3] {
-
-//     // convert hex to rgb in rust
-//     [0,1,2]
-// }
-
 fn hex_to_rgb(hex: &str) -> (u8, u8, u8) {
     let hex = hex.trim_start_matches('#');
 
@@ -42,11 +36,6 @@ fn main() {
 fn test_hello_world() {
     assert_eq!(hello_world(), "Hello, world!");
 }
-
-// #[test]
-// fn test_convert_colors() {
-//     assert_eq!(convert_color(color: "FFFFFF"), [255,255,255]);
-// }
 
 #[test]
 fn test_hex_to_rgb() {
