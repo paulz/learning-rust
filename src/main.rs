@@ -52,9 +52,11 @@ fn test_invalid_hex_to_rgb() {
 
 #[cfg(test)]
 mod tests {
+    use super::hex_to_rgb;
 
     #[test]
-    fn test_valid_hex_to_rgb() {
-        // assert_eq!(hello_world(), "Hello, world!");
+    fn test_invalid_hex_to_rgb() {
+        let invalid_result = hex_to_rgb("invalid");
+        assert_eq!(invalid_result.err().unwrap(), "Invalid color");
     }
 }
