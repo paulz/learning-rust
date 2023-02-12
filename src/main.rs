@@ -20,7 +20,7 @@ fn hex_to_rgb(hex: &str) -> Result<(u8, u8, u8), &str> {
         let b = u8::from_str_radix(&hex[2..3], 16).unwrap();
         Ok((r * 16 + r, g * 16 + g, b * 16 + b))
     } else {
-        Err("invalid color")
+        Err("Invalid color")
     };
 
     result
@@ -38,8 +38,8 @@ fn test_hello_world() {
 }
 
 #[test]
-fn test_hex_to_rgb() {
-    let success_cases: [(&str, (u8,u8,u8));8] = [
+fn test_valid_hex_to_rgb() {
+    let success_cases: [(&str, (u8,u8,u8));7] = [
         ("#000000", (0, 0, 0)),
         ("#ffffff", (255, 255, 255)),
         ("#FF0000", (255, 0, 0)),
@@ -47,7 +47,6 @@ fn test_hex_to_rgb() {
         ("#0000FF", (0, 0, 255)),
         ("#F0F0F0", (240, 240, 240)),
         ("#abcdef", (171, 205, 239)),
-        ("#hello", (0, 0, 0)),
     ];
 
     for case in success_cases.iter() {
@@ -56,8 +55,11 @@ fn test_hex_to_rgb() {
         
         assert_eq!(result.ok().unwrap(), *expected, "hex: {}", hex);
     }
+}
 
-    let invalid_result = hex_to_rgb("foo");
+#[test]
+fn test_invalid_hex_to_rgb() {
+    let invalid_result = hex_to_rgb("invalid");
     assert_eq!(invalid_result.err().unwrap(), "Invalid color");
 }
 
