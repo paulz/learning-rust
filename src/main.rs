@@ -64,9 +64,6 @@ fn test_hex_to_rgb() {
         let (hex, expected) = case;
         let result = hex_to_rgb(hex);
         assert_eq!(result, *expected, "hex: {}", hex);
-
-
-        // assert_eq!(result, expected, "hex: {}", hex);
     }
 }
 
