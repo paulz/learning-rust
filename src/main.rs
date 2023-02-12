@@ -24,35 +24,29 @@ fn main() {
     // println!("{}", convert_colors());
 }
 
-#[test]
-fn test_valid_hex_to_rgb() {
-    let success_cases: [(&str, (u8, u8, u8)); 7] = [
-        ("#000000", (0, 0, 0)),
-        ("#ffffff", (255, 255, 255)),
-        ("#FF0000", (255, 0, 0)),
-        ("#00FF00", (0, 255, 0)),
-        ("#0000FF", (0, 0, 255)),
-        ("#F0F0F0", (240, 240, 240)),
-        ("#abcdef", (171, 205, 239)),
-    ];
-
-    for case in success_cases.iter() {
-        let (hex, expected) = case;
-        let result = hex_to_rgb(hex);
-
-        assert_eq!(result.ok().unwrap(), *expected, "hex: {}", hex);
-    }
-}
-
-#[test]
-fn test_invalid_hex_to_rgb() {
-    let invalid_result = hex_to_rgb("invalid");
-    assert_eq!(invalid_result.err().unwrap(), "Invalid color");
-}
-
 #[cfg(test)]
 mod tests {
     use super::hex_to_rgb;
+
+    #[test]
+    fn test_valid_hex_to_rgb() {
+        let success_cases: [(&str, (u8, u8, u8)); 7] = [
+            ("#000000", (0, 0, 0)),
+            ("#ffffff", (255, 255, 255)),
+            ("#FF0000", (255, 0, 0)),
+            ("#00FF00", (0, 255, 0)),
+            ("#0000FF", (0, 0, 255)),
+            ("#F0F0F0", (240, 240, 240)),
+            ("#abcdef", (171, 205, 239)),
+        ];
+
+        for case in success_cases.iter() {
+            let (hex, expected) = case;
+            let result = hex_to_rgb(hex);
+
+            assert_eq!(result.ok().unwrap(), *expected, "hex: {}", hex);
+        }
+    }
 
     #[test]
     fn test_invalid_hex_to_rgb() {
