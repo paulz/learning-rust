@@ -1,4 +1,4 @@
-#!no_std
+#![no_std]
 
 fn hex_to_rgb(hex: &str) -> Result<(u8, u8, u8), &str> {
     let hex = hex.trim_start_matches('#');
